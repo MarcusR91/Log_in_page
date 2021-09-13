@@ -45,15 +45,15 @@ function notValid(){
 }
 function loggedIn(){
    let store = localStorage.getItem("Name");
-   newDiv.innerHTML = "välommen " + `${store}`;
+   newDiv.innerText = "välommen " + `${store}`;
 
    const eraseButton = document.createElement("button"); // skapar erasebutton
-   eraseButton.innerHTML = "Logout";
+   eraseButton.innerText = "Logout";
    newDiv.appendChild(eraseButton);
    
    eraseButton.addEventListener('click', function(){ 
        localStorage.removeItem("Name"); // tar bort item från localstorage
-       newDiv.innerHTML = ""; // Div vlir en tome textsträng
+       newDiv.innerText = ""; // Div vlir en tome textsträng
 
        document.getElementById("user-name").style.visibility = "visible";
        document.getElementById("password").style.visibility = "visible";
@@ -63,3 +63,15 @@ function loggedIn(){
 
 }
 
+function checkUser(){ // funktion som skrivre ut avärdet endast om det finns ett värder, slipper null. 
+    let store = localStorage.getItem("Name")
+
+    if(store){ //om store har ett värde så ska loggedin funktionen köras och inloggrutorna ska hållas döljda
+        loggedIn();
+        document.getElementById("user-name").style.visibility = "hidden";
+        document.getElementById("password").style.visibility = "hidden";
+        document.getElementById("btn").style.visibility = "hidden";
+    };
+};
+
+checkUser(); // Kör denna funktion för att hålla nvändaren inloggad under refresh
