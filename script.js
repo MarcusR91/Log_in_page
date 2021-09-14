@@ -8,6 +8,9 @@ const pswValue = document.getElementById("password");
 const newDiv = document.createElement("div")
 document.body.appendChild(newDiv);
 
+const errorDiv = document.createElement("div")
+document.body.appendChild(errorDiv);
+
 btn.addEventListener('click', function(){
 
    
@@ -39,10 +42,24 @@ function notValid(){
     document.getElementById("password").style.visibility = "hidden";
     document.getElementById("btn").style.visibility = "hidden";
 
-    const h1 = document.createElement('h1');
-    newDiv.appendChild(h1);
-    h1.innerText = "Fel Lösenord";
+    const retry = document.createElement("button");
+    retry.innerText = "Try again!";
+    newDiv.appendChild(retry);
+    
+    const errorMsg = document.createElement('h1');
+    errorDiv.appendChild(errorMsg);
+    errorMsg.innerText = "Fel Lösenord";
+
+    retry.addEventListener('click', function(){
+        
+        document.getElementById("user-name").style.visibility = "visible";
+        document.getElementById("password").style.visibility = "visible";
+        document.getElementById("btn").style.visibility = "visible";
+        newDiv.innerText = "";
+        errorDiv.innerText = "";
+    })
 }
+
 function loggedIn(){
    let store = localStorage.getItem("Name");
    newDiv.innerText = "välommen " + `${store}`;
