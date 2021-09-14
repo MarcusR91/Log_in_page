@@ -11,33 +11,24 @@ document.body.appendChild(newDiv);
 const errorDiv = document.createElement("div")
 document.body.appendChild(errorDiv);
 
-btn.addEventListener('click', function(){
+btn.addEventListener('click', function () {
 
-   
 
-    if(inpValue.value === userName && pswValue.value === password ){
+
+    if (inpValue.value === userName && pswValue.value === password) {
         localStorage.setItem("Name", inpValue.value);
-        welcome();
-        loggedIn();  
+        loggedIn();
     }
-    else{
+    else {
         notValid();
     }
 })
 
-// Välkomstsida för den inloggade användaren
-function welcome(){
-    document.getElementById("user-name").style.visibility = "hidden";
-    document.getElementById("password").style.visibility = "hidden";
-    document.getElementById("btn").style.visibility = "hidden";
-    
-    // const h1 = document.createElement('h1');
-    // newDiv.appendChild(h1);
-    // h1.innerText = "Välkommen";
-}
+
+
 
 // Fel meddelande om inlogg uppgifterna är fel
-function notValid(){
+function notValid() {
     document.getElementById("user-name").style.visibility = "hidden";
     document.getElementById("password").style.visibility = "hidden";
     document.getElementById("btn").style.visibility = "hidden";
@@ -45,13 +36,13 @@ function notValid(){
     const retry = document.createElement("button");
     retry.innerText = "Try again!";
     newDiv.appendChild(retry);
-    
+
     const errorMsg = document.createElement('h1');
     errorDiv.appendChild(errorMsg);
     errorMsg.innerText = "Fel Lösenord";
 
-    retry.addEventListener('click', function(){
-        
+    retry.addEventListener('click', function () {
+
         document.getElementById("user-name").style.visibility = "visible";
         document.getElementById("password").style.visibility = "visible";
         document.getElementById("btn").style.visibility = "visible";
@@ -60,30 +51,33 @@ function notValid(){
     })
 }
 
-function loggedIn(){
-   let store = localStorage.getItem("Name");
-   newDiv.innerText = "välommen " + `${store}`;
+function loggedIn() {
+    document.getElementById("user-name").style.visibility = "hidden";
+    document.getElementById("password").style.visibility = "hidden";
+    document.getElementById("btn").style.visibility = "hidden";
+    let store = localStorage.getItem("Name");
+    newDiv.innerText = "välommen " + `${store}`;
 
-   const eraseButton = document.createElement("button"); // skapar erasebutton
-   eraseButton.innerText = "Logout";
-   newDiv.appendChild(eraseButton);
-   
-   eraseButton.addEventListener('click', function(){ 
-       localStorage.removeItem("Name"); // tar bort item från localstorage
-       newDiv.innerText = ""; // Div vlir en tome textsträng
+    const eraseButton = document.createElement("button"); // skapar erasebutton
+    eraseButton.innerText = "Logout";
+    newDiv.appendChild(eraseButton);
 
-       document.getElementById("user-name").style.visibility = "visible";
-       document.getElementById("password").style.visibility = "visible";
-       document.getElementById("btn").style.visibility = "visible";
+    eraseButton.addEventListener('click', function () {
+        localStorage.removeItem("Name"); // tar bort item från localstorage
+        newDiv.innerText = ""; // Div vlir en tome textsträng
 
-   })
+        document.getElementById("user-name").style.visibility = "visible";
+        document.getElementById("password").style.visibility = "visible";
+        document.getElementById("btn").style.visibility = "visible";
+
+    })
 
 }
 
-function checkUser(){ // funktion som skrivre ut avärdet endast om det finns ett värder, slipper null. 
+function checkUser() { // funktion som skrivre ut avärdet endast om det finns ett värder, slipper null. 
     let store = localStorage.getItem("Name")
 
-    if(store){ //om store har ett värde så ska loggedin funktionen köras och inloggrutorna ska hållas döljda
+    if (store) { //om store har ett värde så ska loggedin funktionen köras och inloggrutorna ska hållas döljda
         loggedIn();
         document.getElementById("user-name").style.visibility = "hidden";
         document.getElementById("password").style.visibility = "hidden";
